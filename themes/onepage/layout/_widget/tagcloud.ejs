@@ -1,0 +1,15 @@
+<% if (site.tags.length){ %>
+  <div class="sidebar-module">
+    <div class="head-side">Tag Cloud</div>
+    <p class="tagcloud">
+      <%- tagcloud({
+        min_font: 16,
+        max_font: 30,
+        amount: 200,
+        color: true,
+        start_color: '#ff0000',
+        end_color: '#ffcc00'
+        }) %>
+    </p>
+  </div>
+<% } %>

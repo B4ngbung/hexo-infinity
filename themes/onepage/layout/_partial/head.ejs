@@ -1,0 +1,174 @@
+<%
+    var title = '';
+    var title_suffix = ' - ' + config.title;
+    var fb_admin_ids = [];
+    var keywords = '';
+    var photos = [];
+    var publisher = '';
+    var ddesc = '';
+
+    /**
+     * Separate fb admin ids
+     */
+    (function() {
+        if (theme.fb_admin_ids) {
+            fb_admin_ids = String(theme.fb_admin_ids).split(',');
+        }
+    })();
+
+    /**
+     * Pick publisher G+ profile
+     */
+    (function() {
+        if (theme.author.google_plus_business) {
+            publisher = theme.author.google_plus_business;
+        }
+        else if (theme.author.google_plus) {
+            publisher = theme.author.google_plus;
+        }
+    })();
+
+    /**
+     * Generate page title
+     */
+    (function() {
+        if (is_home()) {
+            title += config.subtitle;
+        }
+        else if (is_archive()){
+            title += __('archives');
+
+            if (is_month()) {
+                title += ': ' + page.year + '/' + page.month;
+            }
+            else if (is_year()) {
+                title += ': ' + page.year;
+            }
+
+            title += title_suffix;
+        }
+        else if (is_tag()) {
+            if (page.tag) {
+                title += __('tag') + ': ' + page.tag;
+            }
+            else {
+                title += __('tags');
+            }
+
+            title += title_suffix;
+        }
+        else if (is_category()) {
+            if (page.category) {
+                title += __('category') + ': ' + page.category;
+            }
+            else {
+                title += __('categories');
+            }
+            title += title_suffix;
+        }
+        else {
+            title += page.title + title_suffix;
+        }
+    })();
+
+    /** Generate description **/
+    (function() {
+        if (is_home()) {
+            ddesc += config.description;
+        }
+        else if (page.description){
+            ddesc += page.description;
+        }
+        else if (page.excerpt) {
+            ddesc += strip_html(page.excerpt).replace(/^\s*/, '').replace(/\s*$/, '');
+        }
+        else if (page.content) {
+            ddesc += strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150);
+        }
+        else {
+            ddesc += config.description;
+        }
+    })();
+
+    /**
+     * Get global and page keywords
+     */
+    (function() {
+        if (config.keywords) {
+            keywords += config.keywords;
+            keywords += ',';
+        }
+        if (page.keywords) {
+            keywords += page.keywords;
+        }
+    })();
+
+    /**
+     * Extract original url of page photos and store it
+     * to add them in open graph and swiftype meta tag
+     */
+    (function() {
+        /**
+         * Extract original url of a photo and store it
+         */
+        function processImage(img) {
+            var rPhoto = /([\w:\-\/._#]+)(?:\s+([\w:\-\/._#]+))*(?:\s*["|'](.+)["|'])*/;
+            match = img.match(rPhoto);
+            photos.push(resolve_asset_url(page.path, match[1]));
+        }
+
+        if (page.gallery && page.gallery.length) {
+            page.gallery.forEach(function(photo) {
+                processImage(photo)
+            });
+        }
+        else if (page.photos && page.photos.length) {
+            page.photos.forEach(function(photo) {
+                processImage(photo);
+            });
+        }
+    })();
+%>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="pf8sLnPCLmzFXkkgCA88JT_jjYnGRyOsgW7U3Z_vj60" />
+    <title><%= title %></title>
+    <% if (config.author){ %><meta name="author" content="<%= config.author %>"> <% } %>
+    <% if (is_post() && config.generator_amp){ %>
+        <link rel="amphtml" href="<%= config.url %><%= config.root %>amp/<%= page.path %>">
+      <% } %>
+    <%- partial('favicon') %>
+    <%- canonicalLink(config, page) %>
+    <%- json_ld() %>
+    <% if (is_home() || is_category()){ %>
+        <%- open_graph({
+            type: 'blog',
+            twitter_id: theme.author.twitter,
+            fb_app_id: theme.fb_app_id,
+            images: 'https://res.cloudinary.com/sr168/image/upload/v1603100216/ip/og.jpg'
+          })
+        %>
+    <% } else { %>
+        <%- open_graph({
+            type: 'blog',
+            twitter_id: theme.author.twitter,
+            fb_app_id: theme.fb_app_id
+          })
+        %>
+    <% } %>   
+    <% if (theme.rss){ %>
+      <link rel="alternate" href="<%- url_for(theme.rss) %>" title="<%= config.title %>" type="application/atom+xml">
+    <% } %>
+    <% if (config.highlight.enable){ %>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <% } %>
+
+    <%- css('//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css') %>
+    <%- css('//cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css') %>
+    <link rel="alternate" type="application/rss+xml" title="<%= config.title %>" href="<%= full_url_for(`/rss.xml}`) %>" />
+    <%- css('css/style') %>
+    <%- partial('google-analytics') %>
+</head>

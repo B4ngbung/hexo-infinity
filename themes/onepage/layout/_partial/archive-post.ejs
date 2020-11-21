@@ -1,0 +1,14 @@
+<div class="col-md-4 col-sm-6 mb-3">
+    <article class="archive-article archive-type-<%= post.layout %>">
+        <%- image_tag(post.thumbnail, {class: "img-thumb-archive", alt: "thumbnail"}) %>
+        <div class="archive-article-header">
+            <%- partial('post/title', {class_name: 'archive-article-title'}) %>
+            <div class="cat">
+                <%- partial('post/category') %>
+                <%- partial('post/date', {class_name: 'archive-article-date', date_format: 'YYYY MMMM Do '}) %>           
+            </div>
+            <div class="description"><%- post.description %></div> 
+            <div class="article-meta"><%- partial('post/tag') %></div>        
+        </div>
+    </article>
+</div>

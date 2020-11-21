@@ -1,0 +1,8 @@
+<div id="search-form-wrap">
+    <% if (theme.search.insight) { %>
+        <form class="search-form">
+            <input type="search" class="search-field form-control" style="height: 42px;" placeholder=" <%= __('search') %>…" value="" name="s" title="Search for:">
+        </form>
+        <%- partial('search/insight') %>
+    <% } %>
+</div>

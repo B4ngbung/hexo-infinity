@@ -1,0 +1,42 @@
+<div class="col-12 mb-3">
+    <article id="<%= post.layout %>-<%= post.slug %>" class="blog-entry ftco-animate article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+        <div class="article-inner">
+            <div class="article-entry " itemprop="articleBody" >
+                <div class="article-detail">
+                   <!-- <%- image_tag(post.thumbnail, {class: "img-thumbnail", alt: "thumbnail"}) %> -->
+                    <div class="artikel">                                    
+                        <h2 class="head-text">
+                        <%= post.title %> 
+                            <div class="article-meta">
+                                <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+                                <% if (post.author){ %>
+                                    <div class="article-author">
+                                        <%= post.author %></div>
+                                <% } %>
+                            </div>       
+                        </h2>  
+                                           
+                        <div class="description">   
+                                                 
+                            <%- post.content %>
+                        </div>
+                    </div> 
+                </div>
+
+                <% if (page.related_posts && page.related_posts.length > 0) { %>
+                    <section>
+                        <h2>Related posts</h2>
+                        <ul>
+                        <% for (const path of page.related_posts) { %>
+                            <% const url = url_for(path) %>
+                            <% if (url) { %>
+                                <li><a href="<%= url %>"><%= url %></a></li>
+                            <% } %>
+                        <% } %>
+                        </ul>
+                    </section>
+                <% } %>
+            </div>
+        </div>
+    </article>  
+</div>

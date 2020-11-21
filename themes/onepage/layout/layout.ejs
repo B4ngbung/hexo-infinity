@@ -1,0 +1,28 @@
+<%- partial('_partial/head') %>
+<body>
+    <%- partial('_partial/header') %>
+    <%- partial('_partial/slider') %>   
+    <main class="animate__animated animate__slideInUp">
+        <div class="container">    
+            <div class="row">   
+                <%- body %>
+            </div>
+        </div>
+    </main>
+    <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+    <%- partial('_partial/inline-scripts') %>
+
+    <script>
+        window.onscroll = function() {myFunction()};
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            } else {
+            header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<% if (site.posts.length){ %>
+    <div class="sidebar-module">
+        <div class="head-side"><%- __('recent_posts') %></div>
+        <ul class="sidebar-module-list">
+        <% site.posts.sort('date', -1).limit(6).each(function(post){ %>
+            <li>
+                <div class="litle-post">
+                    <div class="blog-img mr-3" style="background-image: url('<%- post.thumbnail %>')"></div>
+                    <a  href="<%- url_for(post.path) %>">
+                        <h3 class="title-list"> <%- post.title %></h3>
+                    </a>
+                    <%- partial('_partial/post/category', { post: post, index: true, class_name: '' }) %>
+                    <div class="article-datetime"><%- full_date(post.date,'YYYY MMMM Do ') %></div>
+                </div>
+            </li>
+        <% }) %>
+        </ul>
+    </div>
+<% } %>

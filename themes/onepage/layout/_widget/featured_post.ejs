@@ -1,0 +1,15 @@
+<!-- BEGIN FEATURED POSTS -->
+<div class="sidebar-module">
+    <div class="head-side">Featured Posts</div>
+    <div class="featured-news mb-2">
+        <% site.tags.findOne({name: 'featured'}).posts.sort('date', -1).limit(5).each(function(post, index) {%>
+            <div class="row mb-2">
+                <div class="col-3 pr-0">
+                <%- image_tag(post.thumbnail, {class: "img-featured", alt: "images"}) %>
+                </div>
+                <div class="col-9 "><h3><a href="<%- url_for(post.path) %>"><%- post.title %></a></h3></div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+<!-- END FEATURED POSTS -->

@@ -1,0 +1,73 @@
+
+<% if (index){ %>    
+    <div class="col-md-4 d-flex ">
+        <article id="<%= post.layout %>-<%= post.slug %>" class="blog-entry ftco-animate article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+<% } else { %>
+    <div class="col-lg-8 mb-4">
+        <article id="<%= post.layout %>-<%= post.slug %>" class="ftco-animate article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+            <header class="article-header">
+                <%- partial('post/title', {class_name: 'article-title'}) %>
+            </header>
+            <div class="article-meta">
+            </div>
+<% } %>
+            <div class="article-inner">
+                <% if (index){ %>
+                    <div class="article-entry " itemprop="articleBody" >
+                <% } else { %>
+                    <div class="article-entry" itemprop="articleBody" style="height: auto;">
+                        <% } %>
+                        <div class="article-detail">
+                            <% if (post.description && index){ %>
+                                <div class="img" style="background-image: url(<%- post.thumbnail %>)"></div>  
+                                <div class="text p-4">                                    
+                                    <%- partial('post/title', {class_name: 'mb-2'}) %>                                    
+                                    <div class="article-meta">
+                                        <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+                                        <% if (post.author){ %>
+                                            <div class="article-author">
+                                                <%= post.author %></div>
+                                        <% } %>
+                                        <%- partial('post/category') %>
+                                    </div>
+                                    <div class="description">
+                                        <%- post.description %>
+                                    </div>
+                                </div>                          
+                            <% } else { %>
+                                <div class="content">
+                                    <%- post.content %>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% if (!(post.excerpt && index)){ %>
+                        <%- partial('post/gallery') %>
+                    <% } %>
+                    <% if (page.related_posts && page.related_posts.length > 0) { %>
+                        <section>
+                            <h2>Related posts</h2>
+                            <ul>
+                            <% for (const path of page.related_posts) { %>
+                                <% const url = url_for(path) %>
+                                <% if (url) { %>
+                                    <li><a href="<%= url %>"><%= url %></a></li>
+                                <% } %>
+                            <% } %>
+                            </ul>
+                        </section>
+                    <% } %>
+            </div>
+            <% if (!index){ %>
+            <%- partial('post/nav') %>
+            <% } %>
+        </article>     
+    
+    <% if (!index){ %>     
+        </div>
+        <div class="col-lg-4 sidebar border-left">
+            <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
+        </div>
+    <% } else { %>
+    </div>
+ 
+    <% } %>

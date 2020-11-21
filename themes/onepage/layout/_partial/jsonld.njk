@@ -1,0 +1,40 @@
+    {%- set absolutePageUrl %}{{ page.url | url | absoluteUrl(site.url) }}{% endset -%}
+    {% set isPost = section == 'post' %}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        {% if isPost -%}
+        "@type": "BlogPosting",
+        "headline":"{{title}}",
+        "description": "{{description}}",
+        "mainEntityOfPage": "True",
+        {% else -%}
+        "@type":"WebSite",
+        "headline":"{{ site.title }}",
+        "description": "{{site.description}}",
+        {% endif -%}
+        "url":"{{ absolutePageUrl }}",
+        {% if thumbnail -%}
+            {% if isPost -%}
+        "image":"{{ thumbnail | absoluteUrl(site.url) }}",
+            {% else %}
+        "image":"{{ thumbnail | absoluteUrl(site.url) }}"
+            {% endif %}
+        {% else -%}
+            {% if isPost -%}
+        "image": "{{ site.logo }}",
+            {% else %}
+        "image": "{{ site.logo }}"
+            {% endif %}
+        {% endif -%}
+        {% if isPost -%}
+        "datePublished": "{{ date | htmlDateString }}",
+        "dateModified":"{{ modified_date | htmlDateString }}",
+        "publisher":"{{author.name}}",
+        "author": {
+            "@type": "Person",
+            "name": "{{author.name}}"
+        }
+        {% endif -%}
+}
+</script>

@@ -1,0 +1,70 @@
+<div class="slider-home mb-3 mt-3 animate__animated animate__slideInUp">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 pr-md-0 mb-3">
+                <!-- BEGIN CAROUSEL -->            
+                <div class="front-carousel">
+                    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+                        <!-- Carousel items -->
+                        <div class="carousel-inner"> 
+                            <% site.categories.findOne({name: "Games"}).posts.sort('date', -1).limit(3).each(function(post, i){%> 
+                                <% if(i == 0){ %>
+                                    <div class="carousel-item active">
+                                <% } else { %>
+                                    <div class="carousel-item">
+                                <% } %>     
+                                    <a  href="<%- url_for(post.path) %>" aria-labelledby="person2">               
+                                        <%- image_tag(post.article_image, {class: "img-featured", alt: "blog imgages"}) %>             
+                                    </a>                                     
+                                </div>
+                            <% })%>
+                             <a class="carousel-control-prev left hidden_link" href="#myCarousel" data-slide="prev">.
+                            <div class="prev"></div>
+                            </a>
+                            <a class="carousel-control-next right hidden_link" href="#myCarousel" data-slide="next">.
+                                <div class="next"></div>
+                            </a>
+                        </div>
+                        <!-- Carousel nav -->
+                       
+                        <ol class="carousel-indicators">
+                            <% site.categories.findOne({name: "Games"}).posts.sort('date', -1).limit(3).each(function(post, i){%> 
+                                <% if(i == 0){ %>
+                                    <li data-target="#myCarousel" data-slide-to="<%- i %>" class="active">
+                                <% } else { %>
+                                    <li data-target="#myCarousel" data-slide-to="<%- i %>">
+                                <% } %>                    
+                                    <%- image_tag(post.article_image, {class: "img-featured", alt: "blog imgages"}) %>
+                                </li>
+                            <% })%>
+                        </ol>
+                    </div>                
+                </div>
+                <!-- END CAROUSEL -->
+            </div>
+            <div class="col-md-4">
+                <div class="promo">
+                <a href="https://qq88pro.com/" rel="nofollow noreferrer" target="_blank">
+                    <img src="https://res.cloudinary.com/sr168/image/upload/v1577258721/dm/banner/qq88pro-gif-home.gif" alt="QQ88Pro - Promosi Welcome Bonus 100%"></a>
+                </div>
+                <div class="promo">
+                    <a href="https://104.248.155.35/desktop/home" rel="nofollow noreferrer" target="_blank">
+                        <img src="https://res.cloudinary.com/sr168/image/upload/v1602242455/ip/viva786-banner-home.gif" alt="VIVA786 - Slot WCB 100% Terbaru 2020">
+                    </a>
+                </div>
+                <div class="promo">
+                    <a href="https://kia8888.com/" rel="nofollow noreferrer" target="_blank">
+                        <img src="https://res.cloudinary.com/sr168/image/upload/v1602169898/dm/banner/kia888-banner-home.gif" alt="KIA8888 - Slot Welcome Cashback 100% Terbaru 2020">
+                    </a>
+                </div>
+                <div class="promo">
+                    <a href="https://toba888.com/" rel="nofollow noreferrer" target="_blank">
+                        <img src="https://res.cloudinary.com/sr168/image/upload/v1602167011/ip/toba888.gif" alt="Toba888 - Poker 1Gaming Terbaru 2020">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

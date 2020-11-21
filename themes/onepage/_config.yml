@@ -1,0 +1,103 @@
+# Header
+navbar_brand: false
+menu:
+  Home: /
+  News: /categories/News/
+  Games: /categories/Games/
+  Tips: /categories/Tips/
+  Profil: /categories/Profil/
+  Komunitas: /categories/Komunitas/
+
+rss: /atom.xml
+
+# Content
+excerpt_link: Read More
+fancybox: false
+topbar: false
+
+# Sidebar
+widgets:
+##- search
+##- about    # See also: `about_content`
+## category
+## featured_post
+- recent_posts
+- side-banner
+## - archive
+## - tagcloud
+
+# Search
+search:
+    insight: true # you need to install `hexo-generator-json-content` before using Insight Search
+
+# widget behavior
+## archive_type: 'monthly'
+## show_count: true
+
+# Miscellaneous
+google_analytics: 
+favicon: images/favicon.ico
+twitter_id:
+google_plus:
+fb_admins:
+fb_app_id:
+
+about_widget_content:
+  About E-Sports Indonesia
+
+phone:
+email: indoprofile@gmail.com
+address_1: 140 Metropolitan Avenue
+address_2: 5th Floor
+address_3: Brooklyn, NY 11249
+skype: indoprofile
+lat: 40.715911 
+long: -73.962147
+
+author:
+  email:
+  location:
+  # Your profile picture located in folder `source/_images/` (development)
+  # or in `source/assets/images/` (production)
+  # or you can use an external url
+  # Overwritten by your gravatar image if `gravatar_email` is filled
+  picture:
+  # Your Twitter username without the @. E.g : `tranquilpeak`
+  twitter:
+  # Your personal google plus profile id, not your blog or business page id.
+  # E.g : `+JohnDoe` or `123812884128439`
+  google_plus:
+  # Your businnes google plus profile id. If not provided, personal will be used instead.
+  # E.g : `+Tranquilpeak` or `123812884128439`
+  google_plus_business:
+
+sidebar:
+  author_links:
+      # github:
+      #     title: global.github
+      #     url: https://github.com/
+      #     icon: github
+      # stack_overflow:
+      #     title: global.stack_overflow
+      #     url: http://stackoverflow.com/users
+      #     icon: stack-overflow
+      # twitter:
+      #     title: global.twitter
+      #     url: https://twitter.com/
+      #     icon: twitter
+      # facebook:
+      #     title: global.facebook
+      #     url: https://facebook.com/
+      #     icon: facebook
+      # google_plus:
+      #     title: global.google_plus
+      #     url: https://plus.google.com/
+      #     icon: google-plus
+      # linked_in:
+      #     title: global.linkedin
+      #     url: https://www.linkedin.com/profile/
+      #     icon: linkedin
+      # mail:
+      #     title: global.mail
+      #     url: mailto:
+      #     icon: envelope-o

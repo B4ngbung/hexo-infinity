@@ -1,0 +1,27 @@
+<footer class="blog-footer animate__animated animate__slideInUp">
+    <div class="container">
+        <div class="btm-footer mt-3">
+            <div class="row">
+                <div class="col-12">
+                <% if (site.tags.length){ %>
+                <div class="tag-module">
+                    <div class="head-side">Tags</div>
+                    <%- list_tags({show_count: theme.show_count, class: 'tag-module'}) %>
+                </div>
+                <% } %>
+                </div>
+                <div class="col-8">
+                    <div id="footer-info" class="inner">
+                        &copy; <%= date(new Date(), 'YYYY') %> 
+                        Powered by <a href="https://indoprofile.com/" target="_blank">IndoProfile</a>
+                    </div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="plus18"></div>
+                    <a class="btn-share rss" href="/rss.xml" aria-label="subscribe" rel="nofollow" target="_blank" title="E-Sport Feeds">rss</a>
+                </div>
+            </div>
+        </div>
+  </div>
+</footer>
