@@ -13,7 +13,7 @@ timezone: Asia/Jakarta
 
 # URL
 ## If your site is put in a subdirectory, set url as 'https://yoursite.com/child' and root as '/child/'
-url: https://indoprofile.com
+url: https://hexo-infinity.netlify.app
 root: /
 permalink: :title/
 permalink_defaults:
